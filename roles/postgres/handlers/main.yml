@@ -1,0 +1,7 @@
+---
+# handlers file for postgres
+
+- name: enable_postgres
+  service:
+    name: postgresql
+    enabled: yes

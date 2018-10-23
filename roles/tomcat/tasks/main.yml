@@ -1,0 +1,25 @@
+---
+# tasks file for tomcat
+
+- name: Install tomcat
+  yum:
+    name: tomcat
+    state: latest
+  notify: enable_tomcat
+
+- name: create ansible tomcat directory
+  file:
+    path: "{{ tomcat_web_root }}"
+    state: directory
+
+- name: copy static index.html to tomcat web root directory
+  template:
+    src: index.html.j2
+    dest: "{{ tomcat_web_root }}/index.html"
+    mode: 0644
+
+- name: start tomcat
+  service:
+    name: tomcat
+    state: started
+
